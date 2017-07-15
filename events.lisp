@@ -434,14 +434,16 @@ converted to an atom is removed."
   (dformat 2 "client requests to go fullscreen~%")
   (add-wm-state (window-xwin window) :_NET_WM_STATE_FULLSCREEN)
   (setf (window-fullscreen window) t)
-  (focus-window window))
+  (focus-window window)
+  (run-hook-with-args *fullscreen-hook* window :fullscreen))
 
 (defun deactivate-fullscreen (window)
   (setf (window-fullscreen window) nil)
   (dformat 2 "client requests to leave fullscreen~%")
   (remove-wm-state (window-xwin window) :_NET_WM_STATE_FULLSCREEN)
   (update-decoration window)
-  (update-mode-lines (current-screen)))
+  (update-mode-lines (current-screen))
+  (run-hook-with-args *fullscreen-hook* window :normal))
 
 (defun update-fullscreen (window action)
   (let ((fullscreen-p (window-fullscreen window)))

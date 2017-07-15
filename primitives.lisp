@@ -58,6 +58,7 @@
           *mode-line-click-hook*
           *pre-command-hook*
           *post-command-hook*
+          *fullscreen-hook*
           *display*
           *shell-program*
           *maxsize-border-width*
@@ -322,6 +323,11 @@ the command as a symbol.")
 (defvar *post-command-hook* '()
   "Called after a command is called. It is called with 1 argument:
 the command as a symbol.")
+
+(defvar *fullscreen-hook* '()
+  "Called after a window becomes fullscreen or goes back to normal. It
+is called with 2 arguments: the window and the new
+state (:fullscreen :normal)")
 
 ;; Data types and globals used by stumpwm
 
